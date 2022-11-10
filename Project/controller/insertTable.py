@@ -1,9 +1,14 @@
 from commonFunction.fetch_api_data import *
-from commonFunction.connection import conn
+from Connection.connection import Connection
 from commonFunction.constants import *
+import sys
+sys.setrecursionlimit(10**7)
+
+
 
 def insertTable():
-    cn = conn()
+    connectionObject = Connection()
+    cn = connectionObject.conn()
     cursor = cn.cursor()
     recipes  = fetchApiData()
     dishArray = []

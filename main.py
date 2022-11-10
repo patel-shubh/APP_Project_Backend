@@ -1,16 +1,18 @@
 from fastapi import FastAPI
-from Project.commonFunction.connection import conn
+from Project.Connection.connection import *
 import json
 import uvicorn
 app = FastAPI()
 
-cn = conn()
+connectionObject = Connection()
+cn = connectionObject.conn()
 cursor = cn.cursor()
 cursor.execute("select * from dish")
 data = cursor.fetchall()
-formattedData = {}
+# print(data)
+formattedData = []
 for result in data:
-    formattedData[result[0]] = result[1]
+    formattedData.append(result)
 
 
 @app.get("/")
