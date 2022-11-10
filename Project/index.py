@@ -4,14 +4,17 @@ from MySql.queries import *
 
 # insertTable()
 
-obj = dataToObject()
-dishDataObj = obj.dishObjects()
-nutritionDataObj = obj.nutritionObjects()
+# fetchApiData()
+# fetchUserData()
+
+# obj = dataToObject()
+# dishDataObj = obj.dishObjects()
+# nutritionDataObj = obj.nutritionObjects()
 queryObj = Queries()
 queryObj.dishTableCreator()
 queryObj.nutritionTableCreation()
-
-for i in range(len(dishDataObj)):
-    queryObj.dishInsertOneQuery(dishDataObj[i])
-for i in range(len(nutritionDataObj)):
-    queryObj.nutritionInsertOneQuery(nutritionDataObj[i])
+queryObj.userTableCreator()
+# for i in range(len(dishDataObj)):
+#     queryObj.dishInsertOneQuery(dishDataObj[i])
+# for i in range(len(nutritionDataObj)):
+#     queryObj.nutritionInsertOneQuery(nutritionDataObj[i])

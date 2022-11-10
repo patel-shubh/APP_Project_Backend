@@ -41,3 +41,19 @@ class Queries:
             cursor.execute("SET FOREIGN_KEY_CHECKS=0")
             cursor.execute(f"delete from {NUTRITION_TABLE}")
             cursor.execute("SET FOREIGN_KEY_CHECKS=1")
+    
+    def userInsertOneQuery(self,data):
+        # print(type(data.getdishTypes()))
+        cursor.execute("INSERT INTO "+USER_TABLE+" (id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions) VALUES (%s, %s,%s, %s,%s, %s,%s, %s)", (data.getId(),data.getTitle(),data.getreadyInMinutes(),data.getImage(),data.getCuisines(),data.getdishTypes(),data.getInstructions(),data.getServings()))
+    
+    def userTableCreator(self):
+        # print("inside method")
+        cursor.execute(f"SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'app_project' AND table_name = '{USER_TABLE}'")
+        # print(cursor.fetchone()[0])
+        if cursor.fetchone()[0]==0:
+            # print("inside method")
+            cursor.execute(f"CREATE TABLE IF NOT EXISTS {USER_TABLE} (id int,title VARCHAR(255),readyInMinutes VARCHAR(255),servings VARCHAR(255),image VARCHAR(255),cuisines VARCHAR(255),dishTypes VARCHAR(255),instructions VARCHAR(255),vegetarian BOOLEAN,vegan BOOLEAN,glutenFree BOOLEAN,dairyFree BOOLEAN,veryHealthy BOOLEAN,cheap BOOLEAN,veryPopular BOOLEAN,PRIMARY KEY (id))")
+        # else:
+        #     cursor.execute("SET FOREIGN_KEY_CHECKS=0")
+        #     cursor.execute(f"delete from {USER_TABLE}")
+        #     cursor.execute("SET FOREIGN_KEY_CHECKS=1")
