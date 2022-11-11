@@ -22,11 +22,15 @@ class Queries:
     def dishTableCreator(self):
         cursor.execute(f"SELECT COUNT(*) FROM information_schema.tables WHERE table_name = '{DISH_TABLE}'")
         if cursor.fetchone()[0]==0:
+            print("if123")
             cursor.execute(f"CREATE TABLE IF NOT EXISTS {DISH_TABLE} (id int,title VARCHAR(255),readyInMinutes VARCHAR(255),servings VARCHAR(255),image VARCHAR(255),cuisines VARCHAR(255),dishTypes VARCHAR(255),instructions VARCHAR(255),PRIMARY KEY (id))")
         else:
+            print("else123")
             cursor.execute("SET FOREIGN_KEY_CHECKS=0")
             cursor.execute(f"delete from {DISH_TABLE}")
+            cn.commit()
             cursor.execute("SET FOREIGN_KEY_CHECKS=1")
+            print("end123")
     # def dishUpdateOneQuery(self,data):
     #     cursor.execute("INSERT INTO "+DISH_TABLE+" (id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions) VALUES (%s, %s,%s, %s,%s, %s,%s, %s)", (data.getId(),data.getTitle(),data.getreadyInMinutes(),data.getImage(),data.getCuisines(),data.getdishTypes(),data.getInstructions(),data.getServings()))
    

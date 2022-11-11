@@ -12,7 +12,7 @@ def fetchApiData():
     # callApi = requests.get(API_URL)
     # data = json.loads(callApi.content.decode('utf-8'))
     data = json.loads(API_DATA.decode('utf-8'))
-    print(data['recipes'])
+    # print(data['recipes'])
     return data['recipes']
 
 def fetchUserData():

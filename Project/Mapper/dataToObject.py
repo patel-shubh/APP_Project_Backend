@@ -14,10 +14,12 @@ class dataToObject:
 
     def getNewReceipes(self):
         self.__recipes = fetchApiData()
+        print("fetch new data")
     
     def dishObjects(self):
         obj = Queries()
         obj.dishTableCreator()
+        print("table data clear")
         for item in self.__recipes:
             self.__dish.append(Dish(item['id'],item['title'],str(item['readyInMinutes']),item['servings'],item['image'] if ('image' in item) else "",str(item['cuisines'],),str(item['dishTypes']),item['instructions']))
             obj.dishInsertOneQuery(self.__dish[len(self.__dish)-1])
@@ -51,9 +53,10 @@ class dataToObject:
         obj.userDeleteOneQuery(id)
 
 
-    def userDeleteAllObject(self):
+    def receipesDeleteAllObject(self):
         self.__dish.clear()
         self.__nutrition.clear()
+        print("delete objects")
 
         
         # return self.__user

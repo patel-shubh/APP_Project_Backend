@@ -20,19 +20,16 @@ class dishAPI:
                 "data": formattedData}
     
     def getNewDishes(self):
-        self.obj = dataToObject()
+        
         self.obj.getNewReceipes()
+        
         print("get new dishes")
         queryObj = Queries()
         self.obj.receipesDeleteAllObject()
-        queryObj.dishTableCreator()
-        queryObj.nutritionTableCreation()
+            # queryObj.dishTableCreator()
+            # queryObj.nutritionTableCreation()
         dishDataObj = self.obj.dishObjects()
         nutritionDataObj = self.obj.nutritionObjects()
-        for i in range(len(dishDataObj)):
-            queryObj.dishInsertOneQuery(dishDataObj[i])
-        for i in range(len(nutritionDataObj)):
-            queryObj.nutritionInsertOneQuery(nutritionDataObj[i])
         formattedData = []
         for i in range(len(dishDataObj)):
             for j in range(len(nutritionDataObj)):
