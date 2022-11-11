@@ -10,6 +10,8 @@ class dataToObject:
     __nutrition = []
     __user = []
 
+    
+
     def getNewReceipes(self):
         self.__recipes = fetchApiData()
     
