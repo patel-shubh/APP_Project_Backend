@@ -43,13 +43,18 @@ async def root():
 
 @app.post("/dish/add/")
 async def addUser(info : Request):
-    return userApiObj.addUserDish(info)
+    return userApiObj.addUserDish(await info.json())
 
 @app.post("/dish/remove")
 async def removeUser(info : Request):
-    return userApiObj.deleteUserDish(info)
+    return userApiObj.deleteUserDish(await info.json())
     
 @app.get("/user/dish")
 async def userDish():
     return userApiObj.getUserDish()
+
+@app.get("/refresh")
+async def refresh():
+    print("refresh")
+    return dishApiObj.getNewDishes()
 
