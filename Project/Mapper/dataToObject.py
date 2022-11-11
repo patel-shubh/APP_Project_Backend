@@ -17,6 +17,7 @@ class dataToObject:
     
     def dishObjects(self):
         obj = Queries()
+        obj.dishTableCreator()
         for item in self.__recipes:
             self.__dish.append(Dish(item['id'],item['title'],str(item['readyInMinutes']),item['servings'],item['image'] if ('image' in item) else "",str(item['cuisines'],),str(item['dishTypes']),item['instructions']))
             obj.dishInsertOneQuery(self.__dish[len(self.__dish)-1])
@@ -24,6 +25,7 @@ class dataToObject:
     
     def nutritionObjects(self):
         obj = Queries()
+        obj.nutritionTableCreation()
         for item in self.__recipes:
             self.__nutrition.append(Nutrition(item['id'],item['vegetarian'],item['vegan'],item['glutenFree'],item['dairyFree'],item['veryHealthy'],item['cheap'],item['veryPopular']))
             obj.nutritionInsertOneQuery(self.__nutrition[len(self.__nutrition)-1])
@@ -57,6 +59,8 @@ class dataToObject:
         # return self.__user
     
     def userObjects(self):
+        self.__userData = fetchUserData()
+        self.__user.clear()
         for item in self.__userData:
             # print(item[0])
             self.__user.append(User(item[0],item[1],item[2],item[7],item[3],item[4],item[5],item[6],item[8],item[9],item[10],item[11],item[12],item[13],item[14]))

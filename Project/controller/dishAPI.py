@@ -24,7 +24,7 @@ class dishAPI:
         self.obj.getNewReceipes()
         print("get new dishes")
         queryObj = Queries()
-        self.obj.userDeleteAllObject()
+        self.obj.receipesDeleteAllObject()
         queryObj.dishTableCreator()
         queryObj.nutritionTableCreation()
         dishDataObj = self.obj.dishObjects()
