@@ -17,7 +17,7 @@ class Queries:
     
     def dishInsertOneQuery(self,data):
         # print(type(data.getdishTypes()))
-        cursor.execute("INSERT INTO "+DISH_TABLE+" (id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions) VALUES (%s, %s,%s, %s,%s, %s,%s, %s)", (data.getId(),data.getTitle(),data.getreadyInMinutes(),data.getImage(),data.getCuisines(),data.getdishTypes(),data.getInstructions(),data.getServings()))
+        cursor.execute("INSERT INTO "+DISH_TABLE+" (id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions) VALUES (%s, %s,%s, %s,%s, %s,%s, %s)", (data.getId(),data.getTitle(),data.getreadyInMinutes(),data.getServings(),data.getImage(),data.getCuisines(),data.getdishTypes(),data.getInstructions()))
     
     def dishTableCreator(self):
         cursor.execute(f"SELECT COUNT(*) FROM information_schema.tables WHERE table_name = '{DISH_TABLE}'")

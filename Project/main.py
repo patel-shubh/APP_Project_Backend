@@ -3,6 +3,7 @@ import uvicorn
 from Mapper.dataToObject import dataToObject
 from fastapi.middleware.cors import CORSMiddleware
 from controller.dishAPI import dishAPI
+from controller.userAPI import userAPI
 
 app = FastAPI()
 
@@ -34,20 +35,21 @@ obj = dataToObject()
 #         if dishDataObj[i].getId()==nutritionDataObj[j].getdishId():
 #             formattedData.append([dishDataObj[i].getId(),dishDataObj[i].getTitle(),dishDataObj[i].getreadyInMinutes(),dishDataObj[i].getImage(),dishDataObj[i].getCuisines(),dishDataObj[i].getdishTypes(),dishDataObj[i].getInstructions(),dishDataObj[i].getServings(),nutritionDataObj[j].getVegetarian(),nutritionDataObj[j].getVegan(),nutritionDataObj[j].getGlutenFree(),nutritionDataObj[j].getdairyFree(),nutritionDataObj[j].getveryHealthy(),nutritionDataObj[j].getCheap(),nutritionDataObj[j].getveryPopular()])
 
-a=dishAPI()
+dishApiObj=dishAPI()
+userApiObj=userAPI()
 @app.get("/")
 async def root():
-    return a.getDishes()
+    return dishApiObj.getDishes()
 
+@app.post("/dish/add/")
+async def addUser(info : Request):
+    return userApiObj.addUserDish(info)
 
-@app.post("/getuser")
-async def getUser(info : Request):
-    req_info = await info.json()
-    obj.userAddObject(req_info['id'],req_info['title'],req_info['getreadyInMinutes'],req_info['imageUrl'],req_info['getCuisines'],req_info['getdishTypes'],req_info['Instructions'],req_info['getServings'],req_info['getVegetarian'],req_info['getVegan'],req_info['getGlutenFree'],req_info['getdairyFree'],req_info['getveryHealthy'],req_info['getCheap'],req_info['getveryPopular'])
-    return {
-        "status" : "SUCCESS",
-        "data" : "User Dish Successfully Added"
-    }
+@app.post("/dish/remove")
+async def removeUser(info : Request):
+    return userApiObj.deleteUserDish(info)
+    
+@app.get("/user/dish")
+async def userDish():
+    return userApiObj.getUserDish()
 
-if __name__ == "_main_":
-    uvicorn.run(app, host="localhost")
