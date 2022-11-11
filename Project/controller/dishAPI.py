@@ -6,9 +6,8 @@ class dishAPI:
     obj = dataToObject()
     dishDataObj = obj.dishObjects()
     nutritionDataObj = obj.nutritionObjects() 
-    
+
     def getDishes(self):
-          
         formattedData = []
         for i in range(len(self.dishDataObj)):
             for j in range(len(self.nutritionDataObj)):
@@ -21,15 +20,15 @@ class dishAPI:
                 "data": formattedData}
     
     def getNewDishes(self):
-        obj = dataToObject()
-        obj.getNewReceipes()
+        self.obj = dataToObject()
+        self.obj.getNewReceipes()
         print("get new dishes")
         queryObj = Queries()
-        obj.userDeleteAllObject()
+        self.obj.userDeleteAllObject()
         queryObj.dishTableCreator()
         queryObj.nutritionTableCreation()
-        dishDataObj = obj.dishObjects()
-        nutritionDataObj = obj.nutritionObjects()
+        dishDataObj = self.obj.dishObjects()
+        nutritionDataObj = self.obj.nutritionObjects()
         for i in range(len(dishDataObj)):
             queryObj.dishInsertOneQuery(dishDataObj[i])
         for i in range(len(nutritionDataObj)):

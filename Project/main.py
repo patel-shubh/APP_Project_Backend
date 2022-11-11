@@ -27,7 +27,7 @@ app.add_middleware(
 # for result in data:
 #     formattedData.append(result)
 # formattedData = []
-obj = dataToObject()
+# obj = dataToObject()
 # dishDataObj = obj.dishObjects()
 # nutritionDataObj = obj.nutritionObjects()
 # for i in range(len(dishDataObj)):

@@ -45,7 +45,7 @@ class Queries:
     def userInsertOneQuery(self,data):
         # print(data.getId())
         # print(type(data.getdishTypes()))
-        cursor.execute("INSERT INTO "+USER_TABLE+" (id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions,vegetarian ,vegan ,glutenFree ,dairyFree ,veryHealthy ,cheap ,veryPopular) VALUES (%s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s)", (data.getId(),data.getTitle(),data.getreadyInMinutes(),data.getImage(),data.getCuisines(),data.getdishTypes(),data.getInstructions(),data.getServings(),data.getVegetarian(),data.getVegan(),data.getGlutenFree(),data.getdairyFree(),data.getveryHealthy(),data.getCheap(),data.getveryPopular()))
+        cursor.execute("INSERT INTO "+USER_TABLE+" (id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions,vegetarian ,vegan ,glutenFree ,dairyFree ,veryHealthy ,cheap ,veryPopular) VALUES (%s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s)", (data.getId(),data.getTitle(),data.getreadyInMinutes(),data.getServings(),data.getImage(),data.getCuisines(),data.getdishTypes(),data.getInstructions(),data.getVegetarian(),data.getVegan(),data.getGlutenFree(),data.getdairyFree(),data.getveryHealthy(),data.getCheap(),data.getveryPopular()))
     
     def userDeleteOneQuery(self,id):
         # print(data.getId())
