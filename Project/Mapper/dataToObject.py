@@ -16,13 +16,17 @@ class dataToObject:
         self.__recipes = fetchApiData()
     
     def dishObjects(self):
+        obj = Queries()
         for item in self.__recipes:
             self.__dish.append(Dish(item['id'],item['title'],str(item['readyInMinutes']),item['servings'],item['image'] if ('image' in item) else "",str(item['cuisines'],),str(item['dishTypes']),item['instructions']))
+            obj.dishInsertOneQuery(self.__dish[len(self.__dish)-1])
         return self.__dish
     
     def nutritionObjects(self):
+        obj = Queries()
         for item in self.__recipes:
             self.__nutrition.append(Nutrition(item['id'],item['vegetarian'],item['vegan'],item['glutenFree'],item['dairyFree'],item['veryHealthy'],item['cheap'],item['veryPopular']))
+            obj.nutritionInsertOneQuery(self.__nutrition[len(self.__nutrition)-1])
         return self.__nutrition
     
     def userAddObject(self,id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions,vegetarian ,vegan ,glutenFree ,dairyFree ,veryHealthy ,cheap ,veryPopular):
