@@ -64,8 +64,9 @@ class dataToObject:
     def userObjects(self):
         self.__userData = fetchUserData()
         self.__user.clear()
+        
         for item in self.__userData:
-            # print(item[0])
-            self.__user.append(User(item[0],item[1],item[2],item[7],item[3],item[4],item[5],item[6],item[8],item[9],item[10],item[11],item[12],item[13],item[14]))
+            print(item[7])
+            self.__user.append(User(item[0],item[1],item[2],item[3],item[4],item[5],item[6],item[7],item[8],item[9],item[10],item[11],item[12],item[13],item[14]))
         return self.__user
     

@@ -25,8 +25,8 @@ class userAPI:
         formattedData = []
         userObj = self.obj.userObjects()
         for i in range(len(userObj)):
-            formattedData.append({"id": userObj[i].getId(), "title": userObj[i].getTitle(), "getreadyInMinutes": userObj[i].getreadyInMinutes(), "imageUrl": userObj[i].getImage(), "getCuisines": userObj[i].getCuisines(), "getdishTypes": userObj[i].getdishTypes(), "Instructions": userObj[i].getInstructions(), "getServings": userObj[i].getServings(
-                        ), "getVegetarian": userObj[i].getVegetarian(), "getVegan": userObj[i].getVegan(), "getGlutenFree": userObj[i].getGlutenFree(), "getdairyFree": userObj[i].getdairyFree(), "getveryHealthy": userObj[i].getveryHealthy(), "getCheap": userObj[i].getCheap(), "getveryPopular": userObj[i].getveryPopular()})
+            formattedData.append({"id": userObj[i].getId(), "title": userObj[i].getTitle(), "getreadyInMinutes": userObj[i].getreadyInMinutes(), "getServings": userObj[i].getServings(
+                        ), "imageUrl": userObj[i].getImage(), "getCuisines": userObj[i].getCuisines(), "getdishTypes": userObj[i].getdishTypes(), "Instructions": userObj[i].getInstructions(), "getVegetarian": userObj[i].getVegetarian(), "getVegan": userObj[i].getVegan(), "getGlutenFree": userObj[i].getGlutenFree(), "getdairyFree": userObj[i].getdairyFree(), "getveryHealthy": userObj[i].getveryHealthy(), "getCheap": userObj[i].getCheap(), "getveryPopular": userObj[i].getveryPopular()})
         return {"success": "true",
                 "status": 200,
                 "data": formattedData}
