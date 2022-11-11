@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,Request
 import uvicorn
 from Mapper.dataToObject import dataToObject
 
@@ -16,6 +16,7 @@ formattedData = []
 #     formattedData.append(result)
 obj = dataToObject()
 dishDataObj = obj.dishObjects()
+# print(dishDataObj)
 nutritionDataObj = obj.nutritionObjects()
 for i in range(len(dishDataObj)):
     for j in range(len(nutritionDataObj)):
@@ -27,6 +28,16 @@ async def root():
     return {"success": "true",
             "status": 200,
             "data": formattedData}
+
+
+@app.post("/getuser")
+async def getUser(info : Request):
+    req_info = await info.json()
+    obj.userAddObject(req_info['id'],req_info['title'],req_info['getreadyInMinutes'],req_info['imageUrl'],req_info['getCuisines'],req_info['getdishTypes'],req_info['Instructions'],req_info['getServings'],req_info['getVegetarian'],req_info['getVegan'],req_info['getGlutenFree'],req_info['getdairyFree'],req_info['getveryHealthy'],req_info['getCheap'],req_info['getveryPopular'])
+    return {
+        "status" : "SUCCESS",
+        "data" : "User Dish Successfully Added"
+    }
 
 if __name__ == "_main_":
     uvicorn.run(app, host="localhost", port=8080)

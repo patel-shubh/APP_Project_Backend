@@ -15,10 +15,10 @@ def fetchApiData():
     return data['recipes']
 
 def fetchUserData():
-    cursor.execute("select * from dish")
+    cursor.execute("select * from user")
     data = cursor.fetchall()
-    print(data)
-    return data['recipes']
+    # print(data)
+    return data
 
     
     

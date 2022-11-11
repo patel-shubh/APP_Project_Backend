@@ -43,8 +43,15 @@ class Queries:
             cursor.execute("SET FOREIGN_KEY_CHECKS=1")
     
     def userInsertOneQuery(self,data):
+        # print(data.getId())
         # print(type(data.getdishTypes()))
-        cursor.execute("INSERT INTO "+USER_TABLE+" (id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions) VALUES (%s, %s,%s, %s,%s, %s,%s, %s)", (data.getId(),data.getTitle(),data.getreadyInMinutes(),data.getImage(),data.getCuisines(),data.getdishTypes(),data.getInstructions(),data.getServings()))
+        cursor.execute("INSERT INTO "+USER_TABLE+" (id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions,vegetarian ,vegan ,glutenFree ,dairyFree ,veryHealthy ,cheap ,veryPopular) VALUES (%s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s)", (data.getId(),data.getTitle(),data.getreadyInMinutes(),data.getImage(),data.getCuisines(),data.getdishTypes(),data.getInstructions(),data.getServings(),data.getVegetarian(),data.getVegan(),data.getGlutenFree(),data.getdairyFree(),data.getveryHealthy(),data.getCheap(),data.getveryPopular()))
+    
+    def userDeleteOneQuery(self,id):
+        # print(data.getId())
+        # print(type(data.getdishTypes()))
+        # print(id)
+        cursor.execute(f"DELETE FROM {USER_TABLE} where id = {id}",)
     
     def userTableCreator(self):
         # print("inside method")
