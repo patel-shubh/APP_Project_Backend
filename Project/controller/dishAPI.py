@@ -23,7 +23,7 @@ class dishAPI:
         
         self.obj.getNewReceipes()
         
-        print("get new dishes")
+        
         queryObj = Queries()
         # self.obj.receipesDeleteAllObject()
         dishDataObj = self.obj.dishObjectsUpdate()

@@ -3,14 +3,18 @@ import json
 import sys
 
 sys.path.append('../')
+from starlette.requests import Request
 from commonFunction.constants import * 
 from controller.dishAPI import *
 from controller.userAPI import *
 from commonFunction.fetch_api_data import fetchUserData
+from main import *
 
-def test_dishObj():
+pytest_plugins = ('pytest_asyncio',)
+
+def testDishObj():
     obj = dishAPI()
-    f = open("apiLatestData.txt", "r")
+    f = open("../apiLatestData.txt", "r")
     # print(f.read())
     temp = json.loads(f.read())['recipes']
     # print(temp['recipes'])
@@ -23,7 +27,7 @@ def test_dishObj():
     print(finalData)
     assert obj.getDishes()['data'] == finalData
 
-def test_userObj():
+def testUserObj():
     obj = userAPI()
     temp = fetchUserData()
     print(temp)
@@ -35,4 +39,26 @@ def test_userObj():
     print(finalData)
     assert obj.getUserDish()['data'] == finalData
 
-# test_userObj()
+# API Testing 
+
+def testGetDishAPI():
+    response =  getDish()
+    assert response['status'] == STATUS_CODE_FOR_SUCCESS
+
+def testUserDishAPI():
+    response = userDish()
+    assert response['status'] == STATUS_CODE_FOR_SUCCESS
+    
+def testGetRandomDishAPI():
+    response =refreshDish()
+    assert response['status'] == STATUS_CODE_FOR_SUCCESS
+
+@pytest.mark.asyncio
+async def testAddUserDishAPI():
+    response = await addUser(Request(DATA_FOR_TESTING))
+    assert response['status'] == STATUS_CODE_FOR_SUCCESS
+
+@pytest.mark.asyncio
+async def testRemoveUserDishAPI():
+    response = await removeUser(Request(DATA_FOR_TESTING))
+    assert response['status'] == STATUS_CODE_FOR_SUCCESS

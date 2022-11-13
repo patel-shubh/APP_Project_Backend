@@ -37,24 +37,26 @@ app.add_middleware(
 
 dishApiObj=dishAPI()
 userApiObj=userAPI()
+
 @app.get("/")
-async def root():
+def getDish():
     return dishApiObj.getDishes()
 
 @app.post("/dish/add/")
 async def addUser(info : Request):
+    print(type(info),info)
     return userApiObj.addUserDish(await info.json())
 
 @app.post("/dish/remove")
 async def removeUser(info : Request):
+    
     return userApiObj.deleteUserDish(await info.json())
     
 @app.get("/user/dish")
-async def userDish():
+def userDish():
     return userApiObj.getUserDish()
 
 @app.get("/refresh")
-async def refresh():
-    print("refresh")
+def refreshDish():
     return dishApiObj.getNewDishes()
 

@@ -18,7 +18,7 @@ class dataToObject:
 
     def getNewReceipes(self):
         self.__recipes = fetchApiData()
-        print("fetch new data")
+        
     
     def dishObjects(self):
         obj = Queries()
