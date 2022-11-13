@@ -10,7 +10,7 @@ class userAPI:
     def addUserDish(self,req_info):
         # req_info = info.json()
         # print(info)
-        self.obj.userAddObject(req_info['id'],req_info['title'],req_info['getreadyInMinutes'],str(req_info['getServings']),req_info['imageUrl'],req_info['getCuisines'],req_info['getdishTypes'],req_info['Instructions'],req_info['getVegetarian'],req_info['getVegan'],req_info['getGlutenFree'],req_info['getdairyFree'],req_info['getveryHealthy'],req_info['getCheap'],req_info['getveryPopular'])
+        self.obj.userAddObject(req_info['id'],req_info['title'],req_info['getreadyInMinutes'],req_info['getServings'],req_info['imageUrl'],req_info['getCuisines'],req_info['getdishTypes'],req_info['Instructions'],req_info['getVegetarian'],req_info['getVegan'],req_info['getGlutenFree'],req_info['getdairyFree'],req_info['getveryHealthy'],req_info['getCheap'],req_info['getveryPopular'])
         return {"success": "true",
                 "status": 200,
                 "data": "User Dish Successfully Added"}

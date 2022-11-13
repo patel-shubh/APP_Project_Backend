@@ -10,6 +10,7 @@ cursor = cn.cursor()
 
 def fetchApiData():
     # callApi = requests.get(API_URL)
+    # API_DATA = callApi
     # data = json.loads(callApi.content.decode('utf-8'))
     data = json.loads(API_DATA.decode('utf-8'))
     # print(data['recipes'])

@@ -10,6 +10,10 @@ class dataToObject:
     __nutrition = []
     __user = []
 
+    def __new__(cls):
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(dataToObject, cls).__new__(cls)
+        return cls.instance
 
 
     def getNewReceipes(self):
@@ -21,7 +25,7 @@ class dataToObject:
         obj.dishTableCreator()
         print("table data clear")
         for item in self.__recipes:
-            self.__dish.append(Dish(item['id'],item['title'],str(item['readyInMinutes']),item['servings'],item['image'] if ('image' in item) else "",str(item['cuisines'],),str(item['dishTypes']),item['instructions']))
+            self.__dish.append(Dish(item['id'],item['title'],str(item['readyInMinutes']),str(item['servings']),item['image'] if ('image' in item) else "",str(item['cuisines'],),str(item['dishTypes']),item['instructions']))
             obj.dishInsertOneQuery(self.__dish[len(self.__dish)-1])
         return self.__dish
     
@@ -66,7 +70,7 @@ class dataToObject:
         self.__user.clear()
         
         for item in self.__userData:
-            print(item[7])
+            # print(item[7])
             self.__user.append(User(item[0],item[1],item[2],item[3],item[4],item[5],item[6],item[7],item[8],item[9],item[10],item[11],item[12],item[13],item[14]))
         return self.__user
     
