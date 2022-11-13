@@ -22,7 +22,7 @@ class Nutrition:
         self.vegetarian = vegetarian
     
     def getVegan(self):
-        return self.glutenFree
+        return self.vegan
     
     def setVegan(self,vegan):
         self.vegan = vegan

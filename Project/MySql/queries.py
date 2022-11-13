@@ -6,14 +6,19 @@ cn = connectionObject.conn()
 cursor = cn.cursor()
 
 class Queries:
-    _instance = None
     
     def __new__(cls):
-        if cls._instance is None:
-            print('Creating the object')
-            cls._instance = super(Queries, cls).__new__(cls)
-            # Put any initialization here.
-        return cls._instance
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(Queries, cls).__new__(cls)
+        return cls.instance
+    # _instance = None
+    
+    # def __new__(cls):
+    #     if cls._instance is None:
+    #         print('Creating the object')
+    #         cls._instance = super(Queries, cls).__new__(cls)
+    #         # Put any initialization here.
+    #     return cls._instance
     
     def dishInsertOneQuery(self,data):
         # print(type(data.getdishTypes()))
