@@ -25,17 +25,15 @@ class dishAPI:
         
         print("get new dishes")
         queryObj = Queries()
-        self.obj.receipesDeleteAllObject()
-            # queryObj.dishTableCreator()
-            # queryObj.nutritionTableCreation()
-        dishDataObj = self.obj.dishObjects()
-        nutritionDataObj = self.obj.nutritionObjects()
+        # self.obj.receipesDeleteAllObject()
+        dishDataObj = self.obj.dishObjectsUpdate()
+        nutritionDataObj = self.obj.nutritionObjectsUpdate()
         formattedData = []
         for i in range(len(dishDataObj)):
             for j in range(len(nutritionDataObj)):
                 if dishDataObj[i].getId() == nutritionDataObj[j].getdishId():
-                    formattedData.append({"id": dishDataObj[i].getId(), "title": dishDataObj[i].getTitle(), "getreadyInMinutes": dishDataObj[i].getreadyInMinutes(), "imageUrl": dishDataObj[i].getImage(), "getCuisines": dishDataObj[i].getCuisines(), "getdishTypes": dishDataObj[i].getdishTypes(), "Instructions": dishDataObj[i].getInstructions(), "getServings": dishDataObj[i].getServings(
-                    ), "getVegetarian": nutritionDataObj[j].getVegetarian(), "getVegan": nutritionDataObj[j].getVegan(), "getGlutenFree": nutritionDataObj[j].getGlutenFree(), "getdairyFree": nutritionDataObj[j].getdairyFree(), "getveryHealthy": nutritionDataObj[j].getveryHealthy(), "getCheap": nutritionDataObj[j].getCheap(), "getveryPopular": nutritionDataObj[j].getveryPopular()})
+                    formattedData.append({"id": dishDataObj[i].getId(), "title": dishDataObj[i].getTitle(), "getreadyInMinutes": dishDataObj[i].getreadyInMinutes(), "getServings": dishDataObj[i].getServings(
+                    ), "imageUrl": dishDataObj[i].getImage(), "getCuisines": dishDataObj[i].getCuisines(), "getdishTypes": dishDataObj[i].getdishTypes(), "Instructions": dishDataObj[i].getInstructions(), "getVegetarian": nutritionDataObj[j].getVegetarian(), "getVegan": nutritionDataObj[j].getVegan(), "getGlutenFree": nutritionDataObj[j].getGlutenFree(), "getdairyFree": nutritionDataObj[j].getdairyFree(), "getveryHealthy": nutritionDataObj[j].getveryHealthy(), "getCheap": nutritionDataObj[j].getCheap(), "getveryPopular": nutritionDataObj[j].getveryPopular()})
 
         return {"success": "true",
                 "status": 200,

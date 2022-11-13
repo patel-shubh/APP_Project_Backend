@@ -3,3 +3,4 @@ API_DATA = b'{"recipes":[{"vegetarian":false,"vegan":false,"glutenFree":false,"d
 DISH_TABLE = "dish"
 NUTRITION_TABLE = "nutrition"
 USER_TABLE = "user"
+
