@@ -3,4 +3,22 @@ API_DATA = b'{"recipes":[{"vegetarian":false,"vegan":false,"glutenFree":false,"d
 DISH_TABLE = "dish"
 NUTRITION_TABLE = "nutrition"
 USER_TABLE = "user"
+STATUS_CODE_FOR_SUCCESS = 200
+DATA_FOR_TESTING ={
+            "id": 655043,
+            "title": "PB Cup Stuffed Brownie Bites",
+            "getreadyInMinutes": "45",
+            "imageUrl": "https://spoonacular.com/recipeImages/655043-556x370.jpg",
+            "getCuisines": "['American']",
+            "getdishTypes": "['dessert']",
+            "Instructions": "Whisk together sugar, flour, eggs, salt, oil, vanilla, and cocoa powder until well combined. Stir in the semi sweet chocolate chips. Make sure to not over mix!\nPrepare a mini muffin pan with cooking spray and preheat your oven to 350 degrees F.\nScoop batter into the pan.\nFill the slots up about  -  of the way up, so there's a little room for the peanut butter cup stuffed brownie bites to rise.\nCook for 8 - 10 minutes, or until an inserted toothpick comes out almost clean. It's ok if these are slightly underdone.\nOnce the brownies are done, gently push a peanut butter cup in the center of the brownie. Let these set in the pan for a couple of minutes.\nRemove from the pan and let them cool the rest of the way on a cooling rack!",
+            "getServings": 60,
+            "getVegetarian": "false",
+            "getVegan": "false",
+            "getGlutenFree": "false",
+            "getdairyFree": "true",
+            "getveryHealthy": "false",
+            "getCheap": "false",
+            "getveryPopular": "false"
+}
 
