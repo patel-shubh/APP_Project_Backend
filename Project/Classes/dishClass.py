@@ -1,58 +1,58 @@
 class Dish:
     def __init__(self,id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions):
-        self.id = id
-        self.title = title
-        self.readyInMinutes = readyInMinutes
-        self.servings = servings
-        self.image = image
-        self.cuisines = cuisines
-        self.dishTypes = dishTypes
-        self.instructions = instructions
+        self.__id = id
+        self.__title = title
+        self.__readyInMinutes = readyInMinutes
+        self.__servings = servings
+        self.__image = image
+        self.__cuisines = cuisines
+        self.__dishTypes = dishTypes
+        self.__instructions = instructions
 
     def getId(self):
-        return self.id
+        return self.__id
     
     def setId(self,id):
-        self.id = id
+        self.__id = id
     
     def getTitle(self):
-        return self.title
+        return self.__title
     
     def setTitle(self,title):
-        self.title = title
+        self.__title = title
     
     def getreadyInMinutes(self):
-        return self.readyInMinutes
+        return self.__readyInMinutes
     
     def setreadyInMinutes(self,readyInMinutes):
-        self.readyInMinutes = readyInMinutes
+        self.__readyInMinutes = readyInMinutes
     
     def getImage(self):
-        return self.image
+        return self.__image
     
     def setImage(self,image):
-        self.image = image
+        self.__image = image
     
     def getCuisines(self):
-        return self.cuisines
+        return self.__cuisines
     
     def setCuisines(self,cuisines):
-        self.cuisines = cuisines
+        self.__cuisines = cuisines
     
     def getdishTypes(self):
-        return self.dishTypes
+        return self.__dishTypes
     
     def setdishTypes(self,dishTypes):
-        self.dishTypes = dishTypes
+        self.__dishTypes = dishTypes
     
     def getInstructions(self):
-        return self.instructions
+        return self.__instructions
     
     def setInstructions(self,instructions):
-        self.instructions = instructions
+        self.__instructions = instructions
     
     def getServings(self):
-        return self.servings
+        return self.__servings
     
     def setServings(self,servings):
-        self.servings = servings
+        self.__servings = servings

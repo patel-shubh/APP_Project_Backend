@@ -10,7 +10,8 @@ def insertTable():
     connectionObject = Connection()
     cn = connectionObject.conn()
     cursor = cn.cursor()
-    recipes  = fetchApiData()
+    obj = dataFetcher()
+    recipes  = obj.fetchApiData()
     dishArray = []
     nutritionArray = []
     i = 0

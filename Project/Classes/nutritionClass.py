@@ -1,58 +1,58 @@
 class Nutrition:
     def __init__(self,dishId ,vegetarian ,vegan ,glutenFree ,dairyFree ,veryHealthy ,cheap ,veryPopular):
-        self.dishId = dishId
-        self.vegetarian = vegetarian
-        self.vegan = vegan
-        self.glutenFree = glutenFree
-        self.dairyFree = dairyFree
-        self.veryHealthy = veryHealthy
-        self.cheap = cheap
-        self.veryPopular = veryPopular
+        self.__dishId = dishId
+        self.__vegetarian = vegetarian
+        self.__vegan = vegan
+        self.__glutenFree = glutenFree
+        self.__dairyFree = dairyFree
+        self.__veryHealthy = veryHealthy
+        self.__cheap = cheap
+        self.__veryPopular = veryPopular
 
     def getdishId(self):
-        return self.dishId
+        return self.__dishId
     
     def setdishId(self,dishId):
-        self.dishId = dishId
+        self.__dishId = dishId
     
     def getVegetarian(self):
-        return self.vegetarian
+        return self.__vegetarian
     
     def setVegetarian(self,vegetarian):
-        self.vegetarian = vegetarian
+        self.__vegetarian = vegetarian
     
     def getVegan(self):
-        return self.vegan
+        return self.__vegan
     
     def setVegan(self,vegan):
-        self.vegan = vegan
+        self.__vegan = vegan
     
     def getGlutenFree(self):
-        return self.glutenFree
+        return self.__glutenFree
     
     def setGlutenFree(self,glutenFree):
-        self.glutenFree = glutenFree
+        self.__glutenFree = glutenFree
     
     def getdairyFree(self):
-        return self.dairyFree
+        return self.__dairyFree
     
     def setdairyFree(self,dairyFree):
-        self.dairyFree = dairyFree
+        self.__dairyFree = dairyFree
     
     def getveryHealthy(self):
-        return self.veryHealthy
+        return self.__veryHealthy
     
     def setveryHealthy(self,veryHealthy):
-        self.veryHealthy = veryHealthy
+        self.__veryHealthy = veryHealthy
     
     def getCheap(self):
-        return self.cheap
+        return self.__cheap
     
     def setCheap(self,cheap):
-        self.cheap = cheap
+        self.__cheap = cheap
     
     def getveryPopular(self):
-        return self.veryPopular
+        return self.__veryPopular
     
     def setveryPopular(self,veryPopular):
-        self.veryPopular = veryPopular
+        self.__veryPopular = veryPopular

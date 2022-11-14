@@ -1,19 +1,24 @@
 from Mapper.dataToObject import dataToObject
 from MySql.queries import Queries
+from observer import Observer
 
-class dishAPI:
+class dishAPI():
     
-    obj = dataToObject()
-    dishDataObj = obj.dishObjects()
-    nutritionDataObj = obj.nutritionObjects() 
+    __obj = dataToObject()
+    __observer1 = Observer(__obj)
+    __dishDataObj = __obj.dishObjects()
+    __obj.notify_observers("Dish Objects Fetched")
+    __nutritionDataObj = __obj.nutritionObjects() 
+    __obj.notify_observers("Nutrition Objects Fetched")
+    # __obj.unsubscribe(__observer1)
 
     def getDishes(self):
         formattedData = []
-        for i in range(len(self.dishDataObj)):
-            for j in range(len(self.nutritionDataObj)):
-                if self.dishDataObj[i].getId() == self.nutritionDataObj[j].getdishId():
-                    formattedData.append({"id": self.dishDataObj[i].getId(), "title": self.dishDataObj[i].getTitle(), "getreadyInMinutes": self.dishDataObj[i].getreadyInMinutes(), "getServings": self.dishDataObj[i].getServings(
-                    ), "imageUrl": self.dishDataObj[i].getImage(), "getCuisines": self.dishDataObj[i].getCuisines(), "getdishTypes": self.dishDataObj[i].getdishTypes(), "Instructions": self.dishDataObj[i].getInstructions(), "getVegetarian": self.nutritionDataObj[j].getVegetarian(), "getVegan": self.nutritionDataObj[j].getVegan(), "getGlutenFree": self.nutritionDataObj[j].getGlutenFree(), "getdairyFree": self.nutritionDataObj[j].getdairyFree(), "getveryHealthy": self.nutritionDataObj[j].getveryHealthy(), "getCheap": self.nutritionDataObj[j].getCheap(), "getveryPopular": self.nutritionDataObj[j].getveryPopular()})
+        for i in range(len(self.__dishDataObj)):
+            for j in range(len(self.__nutritionDataObj)):
+                if self.__dishDataObj[i].getId() == self.__nutritionDataObj[j].getdishId():
+                    formattedData.append({"id": self.__dishDataObj[i].getId(), "title": self.__dishDataObj[i].getTitle(), "getreadyInMinutes": self.__dishDataObj[i].getreadyInMinutes(), "getServings": self.__dishDataObj[i].getServings(
+                    ), "imageUrl": self.__dishDataObj[i].getImage(), "getCuisines": self.__dishDataObj[i].getCuisines(), "getdishTypes": self.__dishDataObj[i].getdishTypes(), "Instructions": self.__dishDataObj[i].getInstructions(), "getVegetarian": self.__nutritionDataObj[j].getVegetarian(), "getVegan": self.__nutritionDataObj[j].getVegan(), "getGlutenFree": self.__nutritionDataObj[j].getGlutenFree(), "getdairyFree": self.__nutritionDataObj[j].getdairyFree(), "getveryHealthy": self.__nutritionDataObj[j].getveryHealthy(), "getCheap": self.__nutritionDataObj[j].getCheap(), "getveryPopular": self.__nutritionDataObj[j].getveryPopular()})
 
         return {"success": "true",
                 "status": 200,
@@ -21,13 +26,14 @@ class dishAPI:
     
     def getNewDishes(self):
         
-        self.obj.getNewReceipes()
+        self.__obj.getNewReceipes()
         
-        print("get new dishes")
-        queryObj = Queries()
+        # print("get new dishes")
+        # queryObj = Queries()
+        # observer1 = Observer(queryObj)
         # self.obj.receipesDeleteAllObject()
-        dishDataObj = self.obj.dishObjectsUpdate()
-        nutritionDataObj = self.obj.nutritionObjectsUpdate()
+        dishDataObj = self.__obj.dishObjectsUpdate()
+        nutritionDataObj = self.__obj.nutritionObjectsUpdate()
         formattedData = []
         for i in range(len(dishDataObj)):
             for j in range(len(nutritionDataObj)):
