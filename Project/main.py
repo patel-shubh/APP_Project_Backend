@@ -44,12 +44,10 @@ def getDish():
 
 @app.post("/dish/add/")
 async def addUser(info : Request):
-    print(type(info),info)
     return userApiObj.addUserDish(await info.json())
 
 @app.post("/dish/remove")
 async def removeUser(info : Request):
-    
     return userApiObj.deleteUserDish(await info.json())
     
 @app.get("/user/dish")

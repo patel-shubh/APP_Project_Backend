@@ -1,6 +1,7 @@
 import pytest
 import json
 import sys
+from fastapi.testclient import TestClient
 
 sys.path.append('../')
 from commonFunction.constants import * 
@@ -8,7 +9,10 @@ from controller.dishAPI import *
 from controller.userAPI import *
 from commonFunction.fetch_api_data import fetchUserData
 
-def test_dishObj():
+client = TestClient(app)
+
+
+def testDishObj():
     obj = dishAPI()
     f = open("../apiLatestData.txt", "r")
     # print(f.read())
@@ -35,4 +39,53 @@ def test_userObj():
     print(finalData)
     assert obj.getUserDish()['data'] == finalData
 
-# test_userObj()
+# API Testing 
+def testGetDishAPI():
+    res = client.get('/')
+    assert res.status_code == STATUS_CODE_FOR_SUCCESS
+
+def testAddUserDishAPI():
+    res = client.post('/dish/add/',json={
+            "id": 655043,
+            "title": "PB Cup Stuffed Brownie Bites",
+            "getreadyInMinutes": "45",
+            "imageUrl": "https://spoonacular.com/recipeImages/655043-556x370.jpg",
+            "getCuisines": "['American']",
+            "getdishTypes": "['dessert']",
+            "Instructions": "Whisk together sugar, flour, eggs, salt, oil, vanilla, and cocoa powder until well combined. Stir in the semi sweet chocolate chips. Make sure to not over mix!\nPrepare a mini muffin pan with cooking spray and preheat your oven to 350 degrees F.\nScoop batter into the pan.\nFill the slots up about  -  of the way up, so there's a little room for the peanut butter cup stuffed brownie bites to rise.\nCook for 8 - 10 minutes, or until an inserted toothpick comes out almost clean. It's ok if these are slightly underdone.\nOnce the brownies are done, gently push a peanut butter cup in the center of the brownie. Let these set in the pan for a couple of minutes.\nRemove from the pan and let them cool the rest of the way on a cooling rack!",
+            "getServings": 60,
+            "getVegetarian": "false",
+            "getVegan": "false",
+            "getGlutenFree": "false",
+            "getdairyFree": "true",
+            "getveryHealthy": "false",
+            "getCheap": "false",
+            "getveryPopular": "false"
+    })
+    assert res.status_code == STATUS_CODE_FOR_SUCCESS
+
+def testRemoveUserDishAPI():
+    response = client.post('/dish/remove',json={"id":"655043"})
+    assert response.status_code == STATUS_CODE_FOR_SUCCESS   
+
+# def testGetDishAPI():
+#     response =  getDish()
+#     assert response['status'] == STATUS_CODE_FOR_SUCCESS
+
+# def testUserDishAPI():
+#     response = userDish()
+#     assert response['status'] == STATUS_CODE_FOR_SUCCESS
+    
+# def testGetRandomDishAPI():
+#     response =refreshDish()
+#     assert response['status'] == STATUS_CODE_FOR_SUCCESS
+
+# @pytest.mark.asyncio
+# async def testAddUserDishAPI():
+#     response = await addUser(Request(DATA_FOR_TESTING))
+#     assert response['status'] == STATUS_CODE_FOR_SUCCESS
+
+# @pytest.mark.asyncio
+# async def testRemoveUserDishAPI():
+#     response = await removeUser(Request(DATA_FOR_TESTING))
+#     assert response['status'] == STATUS_CODE_FOR_SUCCESS
