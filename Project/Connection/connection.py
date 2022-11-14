@@ -2,6 +2,7 @@ import mysql.connector as connector
 
 from observer import Observer
 
+
 class Connection(object):
     # _instance = None
 
@@ -17,7 +18,7 @@ class Connection(object):
 
     def unsubscribe(self, observer):
         self._observers.remove(Observer)
-    
+
     def __new__(cls):
         if not hasattr(cls, 'instance'):
             cls.instance = super(Connection, cls).__new__(cls)
@@ -29,16 +30,16 @@ class Connection(object):
     #         cls._instance = super(Connection, cls).__new__(cls)
     #         # Put any initialization here.
     #     return cls._instance
-    
+
     def conn(cls):
         config = {
-            "host":"localhost",
-            "user":"root",
-            "password":"",
+            "host": "localhost",
+            "user": "root",
+            "password": "",
             "database": "app_project"
         }
         try:
-            c = connector.connect(autocommit = True,**config)
+            c = connector.connect(autocommit=True, **config)
             return c
         except:
             print("connection error")

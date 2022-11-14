@@ -1,107 +1,107 @@
 class User:
-    def __init__(self,id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions,vegetarian ,vegan ,glutenFree ,dairyFree ,veryHealthy ,cheap ,veryPopular):
-        self.id = id
-        self.title = title
-        self.readyInMinutes = readyInMinutes
-        self.servings = servings
-        self.image = image
-        self.cuisines = cuisines
-        self.dishTypes = dishTypes
-        self.instructions = instructions
-        self.vegetarian = vegetarian
-        self.vegan = vegan
-        self.glutenFree = glutenFree
-        self.dairyFree = dairyFree
-        self.veryHealthy = veryHealthy
-        self.cheap = cheap
-        self.veryPopular = veryPopular
+    def __init__(self, id, title, readyInMinutes, servings, image, cuisines, dishTypes, instructions, vegetarian, vegan, glutenFree, dairyFree, veryHealthy, cheap, veryPopular):
+        self._id = id
+        self._title = title
+        self._readyInMinutes = readyInMinutes
+        self._servings = servings
+        self._image = image
+        self._cuisines = cuisines
+        self._dishTypes = dishTypes
+        self._instructions = instructions
+        self._vegetarian = vegetarian
+        self._vegan = vegan
+        self._glutenFree = glutenFree
+        self._dairyFree = dairyFree
+        self._veryHealthy = veryHealthy
+        self._cheap = cheap
+        self._veryPopular = veryPopular
 
     def getId(self):
-        return self.id
-    
-    def setId(self,id):
-        self.id = id
-    
+        return self._id
+
+    def setId(self, id):
+        self._id = id
+
     def getTitle(self):
-        return self.title
-    
-    def setTitle(self,title):
-        self.title = title
-    
+        return self._title
+
+    def setTitle(self, title):
+        self._title = title
+
     def getreadyInMinutes(self):
-        return self.readyInMinutes
-    
-    def setreadyInMinutes(self,readyInMinutes):
-        self.readyInMinutes = readyInMinutes
-    
+        return self._readyInMinutes
+
+    def setreadyInMinutes(self, readyInMinutes):
+        self._readyInMinutes = readyInMinutes
+
     def getImage(self):
-        return self.image
-    
-    def setImage(self,image):
-        self.image = image
-    
+        return self._image
+
+    def setImage(self, image):
+        self._image = image
+
     def getCuisines(self):
-        return self.cuisines
-    
-    def setCuisines(self,cuisines):
-        self.cuisines = cuisines
-    
+        return self._cuisines
+
+    def setCuisines(self, cuisines):
+        self._cuisines = cuisines
+
     def getdishTypes(self):
-        return self.dishTypes
-    
-    def setdishTypes(self,dishTypes):
-        self.dishTypes = dishTypes
-    
+        return self._dishTypes
+
+    def setdishTypes(self, dishTypes):
+        self._dishTypes = dishTypes
+
     def getInstructions(self):
-        return self.instructions
-    
-    def setInstructions(self,instructions):
-        self.instructions = instructions
-    
+        return self._instructions
+
+    def setInstructions(self, instructions):
+        self._instructions = instructions
+
     def getServings(self):
-        return self.servings
-    
-    def setServings(self,servings):
-        self.servings = servings
-    
+        return self._servings
+
+    def setServings(self, servings):
+        self._servings = servings
+
     def getVegetarian(self):
-        return self.vegetarian
-    
-    def setVegetarian(self,vegetarian):
-        self.vegetarian = vegetarian
-    
+        return self._vegetarian
+
+    def setVegetarian(self, vegetarian):
+        self._vegetarian = vegetarian
+
     def getVegan(self):
-        return self.glutenFree
-    
-    def setVegan(self,vegan):
-        self.vegan = vegan
-    
+        return self._glutenFree
+
+    def setVegan(self, vegan):
+        self._vegan = vegan
+
     def getGlutenFree(self):
-        return self.glutenFree
-    
-    def setGlutenFree(self,glutenFree):
-        self.glutenFree = glutenFree
-    
+        return self._glutenFree
+
+    def setGlutenFree(self, glutenFree):
+        self._glutenFree = glutenFree
+
     def getdairyFree(self):
-        return self.dairyFree
-    
-    def setdairyFree(self,dairyFree):
-        self.dairyFree = dairyFree
-    
+        return self._dairyFree
+
+    def setdairyFree(self, dairyFree):
+        self._dairyFree = dairyFree
+
     def getveryHealthy(self):
-        return self.veryHealthy
-    
-    def setveryHealthy(self,veryHealthy):
-        self.veryHealthy = veryHealthy
-    
+        return self._veryHealthy
+
+    def setveryHealthy(self, veryHealthy):
+        self._veryHealthy = veryHealthy
+
     def getCheap(self):
-        return self.cheap
-    
-    def setCheap(self,cheap):
-        self.cheap = cheap
-    
+        return self._cheap
+
+    def setCheap(self, cheap):
+        self._cheap = cheap
+
     def getveryPopular(self):
-        return self.veryPopular
-    
-    def setveryPopular(self,veryPopular):
-        self.veryPopular = veryPopular
+        return self._veryPopular
+
+    def setveryPopular(self, veryPopular):
+        self._veryPopular = veryPopular

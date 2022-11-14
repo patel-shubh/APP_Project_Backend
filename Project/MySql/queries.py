@@ -1,17 +1,18 @@
 from Connection.connection import Connection
 from commonFunction.constants import *
 
-connectionObject = Connection()
-cn = connectionObject.conn()
-cursor = cn.cursor()
 
 class Queries(object):
-    
+    _connectionObject = Connection()
+    _cn = _connectionObject.conn()
+    _cursor = _cn.cursor()
+
     def __new__(cls):
         if not hasattr(cls, 'instance'):
             cls.instance = super(Queries, cls).__new__(cls)
         return cls.instance
     # _instance = None
+
     def __init__(self):
         self._observers = []
 
@@ -31,57 +32,66 @@ class Queries(object):
     #         cls._instance = super(Queries, cls).__new__(cls)
     #         # Put any initialization here.
     #     return cls._instance
-    
-    def dishInsertOneQuery(self,data):
+
+    def dishInsertOneQuery(self, data):
         # print(type(data.getdishTypes()))
-        cursor.execute("INSERT INTO "+DISH_TABLE+" (id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions) VALUES (%s, %s,%s, %s,%s, %s,%s, %s)", (data.getId(),data.getTitle(),data.getreadyInMinutes(),data.getServings(),data.getImage(),data.getCuisines(),data.getdishTypes(),data.getInstructions()))
-    
+        self._cursor.execute("INSERT INTO "+DISH_TABLE+" (id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions) VALUES (%s, %s,%s, %s,%s, %s,%s, %s)",
+                             (data.getId(), data.getTitle(), data.getreadyInMinutes(), data.getServings(), data.getImage(), data.getCuisines(), data.getdishTypes(), data.getInstructions()))
+
     def dishTableCreator(self):
-        cursor.execute(f"SELECT COUNT(*) FROM information_schema.tables WHERE table_name = '{DISH_TABLE}'")
-        if cursor.fetchone()[0]==0:
+        self._cursor.execute(
+            f"SELECT COUNT(*) FROM information_schema.tables WHERE table_name = '{DISH_TABLE}'")
+        if self._cursor.fetchone()[0] == 0:
             # print("if123")
-            cursor.execute(f"CREATE TABLE IF NOT EXISTS {DISH_TABLE} (id int,title VARCHAR(255),readyInMinutes VARCHAR(255),servings VARCHAR(255),image VARCHAR(255),cuisines VARCHAR(255),dishTypes VARCHAR(255),instructions VARCHAR(255),PRIMARY KEY (id))")
+            self._cursor.execute(
+                f"CREATE TABLE IF NOT EXISTS {DISH_TABLE} (id int,title VARCHAR(255),readyInMinutes VARCHAR(255),servings VARCHAR(255),image VARCHAR(255),cuisines VARCHAR(255),dishTypes VARCHAR(255),instructions VARCHAR(255),PRIMARY KEY (id))")
         else:
             # print("else123")
-            cursor.execute("SET FOREIGN_KEY_CHECKS=0")
-            cursor.execute(f"delete from {DISH_TABLE}")
-            cn.commit()
-            cursor.execute("SET FOREIGN_KEY_CHECKS=1")
+            self._cursor.execute("SET FOREIGN_KEY_CHECKS=0")
+            self._cursor.execute(f"delete from {DISH_TABLE}")
+            self._cn.commit()
+            self._cursor.execute("SET FOREIGN_KEY_CHECKS=1")
             # print("end123")
     # def dishUpdateOneQuery(self,data):
-    #     cursor.execute("INSERT INTO "+DISH_TABLE+" (id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions) VALUES (%s, %s,%s, %s,%s, %s,%s, %s)", (data.getId(),data.getTitle(),data.getreadyInMinutes(),data.getImage(),data.getCuisines(),data.getdishTypes(),data.getInstructions(),data.getServings()))
-   
-    def nutritionInsertOneQuery(self,data):
-        cursor.execute("INSERT INTO "+NUTRITION_TABLE+" (dishId ,vegetarian ,vegan ,glutenFree ,dairyFree ,veryHealthy ,cheap ,veryPopular) VALUES (%s, %s,%s, %s,%s, %s,%s, %s)", (data.getId(),data.getVegetarian(),data.getVegan(),data.getGlutenFree(),data.getdairyFree(),data.getveryHealthy(),data.getCheap(),data.getveryPopular()))
+    #     self._cursor.execute("INSERT INTO "+DISH_TABLE+" (id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions) VALUES (%s, %s,%s, %s,%s, %s,%s, %s)", (data.getId(),data.getTitle(),data.getreadyInMinutes(),data.getImage(),data.getCuisines(),data.getdishTypes(),data.getInstructions(),data.getServings()))
+
+    def nutritionInsertOneQuery(self, data):
+        self._cursor.execute("INSERT INTO "+NUTRITION_TABLE+" (dishId ,vegetarian ,vegan ,glutenFree ,dairyFree ,veryHealthy ,cheap ,veryPopular) VALUES (%s, %s,%s, %s,%s, %s,%s, %s)",
+                             (data.getId(), data.getVegetarian(), data.getVegan(), data.getGlutenFree(), data.getdairyFree(), data.getveryHealthy(), data.getCheap(), data.getveryPopular()))
 
     def nutritionTableCreation(self):
-        cursor.execute(f"SELECT COUNT(*) FROM information_schema.tables WHERE table_name = '{NUTRITION_TABLE}'")
-        if cursor.fetchone()[0]==0:
-            cursor.execute(f"CREATE TABLE IF NOT EXISTS {NUTRITION_TABLE} (dishId int,vegetarian BOOLEAN,vegan BOOLEAN,glutenFree BOOLEAN,dairyFree BOOLEAN,veryHealthy BOOLEAN,cheap BOOLEAN,veryPopular BOOLEAN,FOREIGN KEY (dishId) REFERENCES dish (id))")
+        self._cursor.execute(
+            f"SELECT COUNT(*) FROM information_schema.tables WHERE table_name = '{NUTRITION_TABLE}'")
+        if self._cursor.fetchone()[0] == 0:
+            self._cursor.execute(
+                f"CREATE TABLE IF NOT EXISTS {NUTRITION_TABLE} (dishId int,vegetarian BOOLEAN,vegan BOOLEAN,glutenFree BOOLEAN,dairyFree BOOLEAN,veryHealthy BOOLEAN,cheap BOOLEAN,veryPopular BOOLEAN,FOREIGN KEY (dishId) REFERENCES dish (id))")
         else:
-            cursor.execute("SET FOREIGN_KEY_CHECKS=0")
-            cursor.execute(f"delete from {NUTRITION_TABLE}")
-            cursor.execute("SET FOREIGN_KEY_CHECKS=1")
-    
-    def userInsertOneQuery(self,data):
+            self._cursor.execute("SET FOREIGN_KEY_CHECKS=0")
+            self._cursor.execute(f"delete from {NUTRITION_TABLE}")
+            self._cursor.execute("SET FOREIGN_KEY_CHECKS=1")
+
+    def userInsertOneQuery(self, data):
         # print(data.getId())
         # print(type(data.getdishTypes()))
-        cursor.execute("INSERT INTO "+USER_TABLE+" (id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions,vegetarian ,vegan ,glutenFree ,dairyFree ,veryHealthy ,cheap ,veryPopular) VALUES (%s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s)", (data.getId(),data.getTitle(),data.getreadyInMinutes(),data.getServings(),data.getImage(),data.getCuisines(),data.getdishTypes(),data.getInstructions(),data.getVegetarian(),data.getVegan(),data.getGlutenFree(),data.getdairyFree(),data.getveryHealthy(),data.getCheap(),data.getveryPopular()))
-    
-    def userDeleteOneQuery(self,id):
+        self._cursor.execute("INSERT INTO "+USER_TABLE+" (id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions,vegetarian ,vegan ,glutenFree ,dairyFree ,veryHealthy ,cheap ,veryPopular) VALUES (%s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s, %s,%s)", (data.getId(), data.getTitle(),
+                             data.getreadyInMinutes(), data.getServings(), data.getImage(), data.getCuisines(), data.getdishTypes(), data.getInstructions(), data.getVegetarian(), data.getVegan(), data.getGlutenFree(), data.getdairyFree(), data.getveryHealthy(), data.getCheap(), data.getveryPopular()))
+
+    def userDeleteOneQuery(self, id):
         # print(data.getId())
         # print(type(data.getdishTypes()))
         # print(id)
-        cursor.execute(f"DELETE FROM {USER_TABLE} where id = {id}",)
-    
+        self._cursor.execute(f"DELETE FROM {USER_TABLE} where id = {id}",)
+
     def userTableCreator(self):
         # print("inside method")
-        cursor.execute(f"SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'app_project' AND table_name = '{USER_TABLE}'")
-        # print(cursor.fetchone()[0])
-        if cursor.fetchone()[0]==0:
+        self._cursor.execute(
+            f"SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'app_project' AND table_name = '{USER_TABLE}'")
+        # print(self._cursor.fetchone()[0])
+        if self._cursor.fetchone()[0] == 0:
             # print("inside method")
-            cursor.execute(f"CREATE TABLE IF NOT EXISTS {USER_TABLE} (id int,title VARCHAR(255),readyInMinutes VARCHAR(255),servings VARCHAR(255),image VARCHAR(255),cuisines VARCHAR(255),dishTypes VARCHAR(255),instructions VARCHAR(255),vegetarian BOOLEAN,vegan BOOLEAN,glutenFree BOOLEAN,dairyFree BOOLEAN,veryHealthy BOOLEAN,cheap BOOLEAN,veryPopular BOOLEAN,PRIMARY KEY (id))")
+            self._cursor.execute(
+                f"CREATE TABLE IF NOT EXISTS {USER_TABLE} (id int,title VARCHAR(255),readyInMinutes VARCHAR(255),servings VARCHAR(255),image VARCHAR(255),cuisines VARCHAR(255),dishTypes VARCHAR(255),instructions VARCHAR(255),vegetarian BOOLEAN,vegan BOOLEAN,glutenFree BOOLEAN,dairyFree BOOLEAN,veryHealthy BOOLEAN,cheap BOOLEAN,veryPopular BOOLEAN,PRIMARY KEY (id))")
         # else:
-        #     cursor.execute("SET FOREIGN_KEY_CHECKS=0")
-        #     cursor.execute(f"delete from {USER_TABLE}")
-        #     cursor.execute("SET FOREIGN_KEY_CHECKS=1")
+        #     self._cursor.execute("SET FOREIGN_KEY_CHECKS=0")
+        #     self._cursor.execute(f"delete from {USER_TABLE}")
+        #     self._cursor.execute("SET FOREIGN_KEY_CHECKS=1")
