@@ -16,7 +16,7 @@ from observer import Observer
 obj = dataToObject()
 observer1 = Observer(obj)
 
-dishDataObj = obj.dishObjects()
+# dishDataObj = obj.dishObjects()
 nutritionDataObj = obj.nutritionObjects()
 
 obj.notify_observers("first observer")
@@ -25,11 +25,11 @@ userDataObj = obj.userObjects()
 queryObj = Queries()
 observer3 = Observer(queryObj)
 queryObj.dishTableCreator()
-queryObj.notify_observers("Dish table vreate or empty")
+queryObj.notify_observers("Dish table create or empty")
 queryObj.nutritionTableCreation()
 queryObj.userTableCreator()
-for i in range(len(dishDataObj)):
-    queryObj.dishInsertOneQuery(dishDataObj[i])
+# for i in range(len(dishDataObj)):
+#     queryObj.dishInsertOneQuery(dishDataObj[i])
 for i in range(len(nutritionDataObj)):
     queryObj.nutritionInsertOneQuery(nutritionDataObj[i])
 

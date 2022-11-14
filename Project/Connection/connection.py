@@ -1,7 +1,22 @@
 import mysql.connector as connector
 
-class Connection():
+from observer import Observer
+
+class Connection(object):
     # _instance = None
+
+    def __init__(self):
+        self._observers = []
+
+    def subscribe(self, observer):
+        self._observers.append(observer)
+
+    def notify_observers(self, *args, **kwargs):
+        for obs in self._observers:
+            obs.notify(self, *args, **kwargs)
+
+    def unsubscribe(self, observer):
+        self._observers.remove(Observer)
     
     def __new__(cls):
         if not hasattr(cls, 'instance'):

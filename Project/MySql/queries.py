@@ -5,7 +5,7 @@ connectionObject = Connection()
 cn = connectionObject.conn()
 cursor = cn.cursor()
 
-class Queries:
+class Queries(object):
     
     def __new__(cls):
         if not hasattr(cls, 'instance'):
@@ -16,6 +16,7 @@ class Queries:
         self._observers = []
 
     def subscribe(self, observer):
+        # print("subsriber append in queries")
         self._observers.append(observer)
 
     def notify_observers(self, *args, **kwargs):
@@ -51,7 +52,7 @@ class Queries:
     #     cursor.execute("INSERT INTO "+DISH_TABLE+" (id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions) VALUES (%s, %s,%s, %s,%s, %s,%s, %s)", (data.getId(),data.getTitle(),data.getreadyInMinutes(),data.getImage(),data.getCuisines(),data.getdishTypes(),data.getInstructions(),data.getServings()))
    
     def nutritionInsertOneQuery(self,data):
-        cursor.execute("INSERT INTO "+NUTRITION_TABLE+" (dishId ,vegetarian ,vegan ,glutenFree ,dairyFree ,veryHealthy ,cheap ,veryPopular) VALUES (%s, %s,%s, %s,%s, %s,%s, %s)", (data.getdishId(),data.getVegetarian(),data.getVegan(),data.getGlutenFree(),data.getdairyFree(),data.getveryHealthy(),data.getCheap(),data.getveryPopular()))
+        cursor.execute("INSERT INTO "+NUTRITION_TABLE+" (dishId ,vegetarian ,vegan ,glutenFree ,dairyFree ,veryHealthy ,cheap ,veryPopular) VALUES (%s, %s,%s, %s,%s, %s,%s, %s)", (data.getId(),data.getVegetarian(),data.getVegan(),data.getGlutenFree(),data.getdairyFree(),data.getveryHealthy(),data.getCheap(),data.getveryPopular()))
 
     def nutritionTableCreation(self):
         cursor.execute(f"SELECT COUNT(*) FROM information_schema.tables WHERE table_name = '{NUTRITION_TABLE}'")

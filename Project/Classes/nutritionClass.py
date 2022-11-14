@@ -1,6 +1,9 @@
-class Nutrition:
-    def __init__(self,dishId ,vegetarian ,vegan ,glutenFree ,dairyFree ,veryHealthy ,cheap ,veryPopular):
-        self.__dishId = dishId
+from Classes.dishClass import Dish
+
+
+class Recipes(Dish):
+    def __init__(self,id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions,vegetarian ,vegan ,glutenFree ,dairyFree ,veryHealthy ,cheap ,veryPopular):
+        super().__init__(id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions)
         self.__vegetarian = vegetarian
         self.__vegan = vegan
         self.__glutenFree = glutenFree
@@ -9,11 +12,11 @@ class Nutrition:
         self.__cheap = cheap
         self.__veryPopular = veryPopular
 
-    def getdishId(self):
-        return self.__dishId
+    # def getdishId(self):
+    #     return self.__dishId
     
-    def setdishId(self,dishId):
-        self.__dishId = dishId
+    # def setdishId(self,dishId):
+    #     self.__dishId = dishId
     
     def getVegetarian(self):
         return self.__vegetarian

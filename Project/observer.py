@@ -9,4 +9,4 @@ class Observer:
         *args,
         **kwargs
         ):
-        print ('Got', args, kwargs, 'From', Object)
+        print ('Observer : ', args, kwargs, 'From', Object)

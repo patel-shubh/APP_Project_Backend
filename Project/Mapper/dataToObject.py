@@ -5,12 +5,14 @@ from Classes.userClass import *
 from MySql.queries import *
 from observer import Observer
 
-class dataToObject:
+class dataToObject(object):
+
     __fetcherObj = dataFetcher()
-    __recipes  = __fetcherObj.fetchApiData()
+    __observer2 = Observer(__fetcherObj)
+    __data  = __fetcherObj.fetchApiData()
+    __fetcherObj.notify_observers("Parent API data fetched")
     __userData = __fetcherObj.fetchUserData()
-    __dish = [] 
-    __nutrition = []
+    __recipes = []
     __user = []
     __obj = Queries()
     __observer1 = Observer(__obj)
@@ -19,6 +21,7 @@ class dataToObject:
         self._observers = []
 
     def subscribe(self, observer):
+        # print("subscriber append",observer)
         self._observers.append(observer)
 
     def notify_observers(self, *args, **kwargs):
@@ -28,104 +31,61 @@ class dataToObject:
     def unsubscribe(self, observer):
         self._observers.remove(observer)
 
-    # def __init__(self):
-    #     Subject.__init__(self)
-    #     self.__recipes  = fetchApiData()
-    #     self.__userData = fetchUserData()
-    #     self.__dish = [] 
-    #     self.__nutrition = []
-    #     self.__user = []
-        
-
-    def __new__(cls):
-        if not hasattr(cls, 'instance'):
-            cls.instance = super(dataToObject, cls).__new__(cls)
-        return cls.instance
-
+        def __new__(cls):
+            if not hasattr(cls, 'instance'):
+                cls.instance = super(dataToObject, cls).__new__(cls)
+            return cls.instance
 
     def getNewReceipes(self):
-        self.__recipes = self.__fetcherObj.fetchApiData()
-        # print("fetch new data")
+        self.__data = self.__fetcherObj.fetchApiData()
+        self.__fetcherObj.notify_observers("Parent API data fetched to get new data")
     
-    def dishObjects(self):
-        # obj = Queries()
-        # observer1 = Observer(obj)
+    def recipesObjects(self):
         self.__obj.dishTableCreator()
-        self.__obj.notify_observers("Delete dish table data or if table did not exist, create table")
-        for item in self.__recipes:
-            self.__dish.append(Dish(item['id'],item['title'],str(item['readyInMinutes']),str(item['servings']),item['image'] if ('image' in item) else "",str(item['cuisines'],),str(item['dishTypes']),item['instructions']))
-            self.__obj.dishInsertOneQuery(self.__dish[len(self.__dish)-1])
-
-        self.__obj.notify_observers("Dish table Inserted ten rows from the objects")   
-        # self.__obj.unsubscribe(observer1)
-        return self.__dish
-    
-    def dishObjectsUpdate(self):
-        # obj = Queries()
-        # observer1 = Observer(obj)
-        self.__obj.dishTableCreator()
-        self.__obj.notify_observers("Delete dish table data or if table did not exist, create table")
-        if len(self.__dish) == len(self.__recipes):
-            for i in range(len(self.__recipes)):
-                # print(self.__recipes[i]['id'])
-                self.__dish[i].setId(self.__recipes[i]['id'])
-                self.__dish[i].setTitle(self.__recipes[i]['title'])
-                self.__dish[i].setreadyInMinutes(str(self.__recipes[i]['readyInMinutes']))
-                self.__dish[i].setServings(str(self.__recipes[i]['servings']))
-                self.__dish[i].setImage(self.__recipes[i]['image'] if ('image' in self.__recipes[i]) else "")
-                self.__dish[i].setCuisines(str(self.__recipes[i]['cuisines']))
-                self.__dish[i].setdishTypes(str(self.__recipes[i]['dishTypes']))
-                self.__dish[i].setInstructions(self.__recipes[i]['instructions'])
-                self.__obj.dishInsertOneQuery(self.__dish[i])
-                # print()
-            self.__obj.notify_observers("Dish table Inserted ten rows")  
-            self.__obj.notify_observers("Dish object list updated")   
-            # obj.unsubscribe(observer1)
-        else:
-            self.receipesDeleteAllObject()
-            self.dishObjects()
-        return self.__dish
-    
-    def nutritionObjects(self):
-        # obj = Queries()
-        # observer1 = Observer(obj)
         self.__obj.nutritionTableCreation()
-        self.__obj.notify_observers("Delete nutrition table data or if table did not exist, create table")
-        for item in self.__recipes:
-            self.__nutrition.append(Nutrition(item['id'],item['vegetarian'],item['vegan'],item['glutenFree'],item['dairyFree'],item['veryHealthy'],item['cheap'],item['veryPopular']))
-            self.__obj.nutritionInsertOneQuery(self.__nutrition[len(self.__nutrition)-1])
-        self.__obj.notify_observers("Nutrition table Inserted ten rows from the objects") 
-          
-        # self.__obj.unsubscribe(observer1)
-        return self.__nutrition
+        self.__obj.notify_observers("Delete both table data or if table did not exist, create table")
+        for item in self.__data:
+            self.__recipes.append(Recipes(item['id'],item['title'],str(item['readyInMinutes']),str(item['servings']),item['image'] if ('image' in item) else "",str(item['cuisines'],),str(item['dishTypes']),item['instructions'],item['vegetarian'],item['vegan'],item['glutenFree'],item['dairyFree'],item['veryHealthy'],item['cheap'],item['veryPopular']))
+            self.__obj.dishInsertOneQuery(self.__recipes[len(self.__recipes)-1])
+            self.__obj.nutritionInsertOneQuery(self.__recipes[len(self.__recipes)-1])
+            
+        self.__obj.notify_observers("recipes Inserted in both table according to columns, ten rows from the objects")
+        return self.__recipes
     
-    def nutritionObjectsUpdate(self):
-        # obj = Queries()
-        # obj.nutritionTableCreation()
-        
-        if len(self.__nutrition) == len(self.__recipes):
+    def recipesObjectsUpdate(self):
+        self.__obj.dishTableCreator()
+        self.__obj.nutritionTableCreation()
+        if len(self.__recipes) == len(self.__data):
             for i in range(len(self.__recipes)):
-                self.__nutrition[i].setdishId(self.__recipes[i]['id'])
-                self.__nutrition[i].setVegetarian(self.__recipes[i]['vegetarian'])
-                self.__nutrition[i].setVegan(self.__recipes[i]['vegan'])
-                self.__nutrition[i].setGlutenFree(self.__recipes[i]['glutenFree'])
-                self.__nutrition[i].setdairyFree(self.__recipes[i]['dairyFree'])
-                self.__nutrition[i].setveryHealthy(self.__recipes[i]['veryHealthy'])
-                self.__nutrition[i].setCheap(self.__recipes[i]['cheap'])
-                self.__nutrition[i].setveryPopular(self.__recipes[i]['veryPopular'])
-                self.__obj.nutritionInsertOneQuery(self.__nutrition[i])
-            self.__obj.notify_observers("Nutrition table Inserted ten rows")  
-            self.__obj.notify_observers("Nutrition object list updated")
+                self.__recipes[i].setId(self.__data[i]['id'])
+                self.__recipes[i].setTitle(self.__data[i]['title'])
+                self.__recipes[i].setreadyInMinutes(str(self.__data[i]['readyInMinutes']))
+                self.__recipes[i].setServings(str(self.__data[i]['servings']))
+                self.__recipes[i].setImage(self.__data[i]['image'] if ('image' in self.__data[i]) else "")
+                self.__recipes[i].setCuisines(str(self.__data[i]['cuisines']))
+                self.__recipes[i].setdishTypes(str(self.__data[i]['dishTypes']))
+                self.__recipes[i].setInstructions(self.__data[i]['instructions'])
+                self.__recipes[i].setVegetarian(self.__data[i]['vegetarian'])
+                self.__recipes[i].setVegan(self.__data[i]['vegan'])
+                self.__recipes[i].setGlutenFree(self.__data[i]['glutenFree'])
+                self.__recipes[i].setdairyFree(self.__data[i]['dairyFree'])
+                self.__recipes[i].setveryHealthy(self.__data[i]['veryHealthy'])
+                self.__recipes[i].setCheap(self.__data[i]['cheap'])
+                self.__recipes[i].setveryPopular(self.__data[i]['veryPopular'])
+                self.__obj.dishInsertOneQuery(self.__recipes[i])
+                self.__obj.nutritionInsertOneQuery(self.__recipes[i])
+                
+            self.__obj.notify_observers("Nutrition table Inserted ten rows")
+            self.__obj.notify_observers("Dish table Inserted ten rows")  
+            self.__obj.notify_observers("Recipes object list updated")
         else:
-            self.nutritionObjects()
-        return self.__nutrition
+            self.recipesObjects()
+        return self.__recipes
     
     def userAddObject(self,id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions,vegetarian ,vegan ,glutenFree ,dairyFree ,veryHealthy ,cheap ,veryPopular):
         self.__user.append(User(id,title,readyInMinutes,servings,image,cuisines,dishTypes,instructions,vegetarian ,vegan ,glutenFree ,dairyFree ,veryHealthy ,cheap ,veryPopular))
-        # obj = Queries()
         self.__obj.userInsertOneQuery(self.__user[len(self.__user)-1])
         self.__obj.notify_observers("Add one user dish in table as well as object")
-        # return self.__user
     
     def userDeleteObject(self,id):
         index = None
@@ -137,28 +97,19 @@ class dataToObject:
             print("index none")
         else:
             del self.__user[index]
-        # obj = Queries()
         self.__obj.userDeleteOneQuery(id)
         self.__obj.notify_observers("Delete one user dish in table as well as object")
 
-
     def receipesDeleteAllObject(self):
-        self.__dish.clear()
-        self.__nutrition.clear()
-        # print("delete objects")
-        # self.__obj.notify_observers("Clear All the objects of dish and nutrition")
+        self.__recipes.clear()
 
-        
-        # return self.__user
-    
     def userObjects(self):
         self.__userData = self.__fetcherObj.fetchUserData()
+        self.__fetcherObj.notify_observers("User data fetched from table")
         self.__user.clear()
         
         for item in self.__userData:
-            # print(item[7])
             self.__user.append(User(item[0],item[1],item[2],item[3],item[4],item[5],item[6],item[7],item[8],item[9],item[10],item[11],item[12],item[13],item[14]))
-        
-        
+
         return self.__user
     
